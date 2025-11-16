@@ -1,0 +1,3 @@
+function walker_string = generate_walker_constellation_command(sat, walker_type, num_planes, num_sats_per_plane, inter_plane_phasing, const_name)
+walker_string = strcat("Walker */Satellite/", sat.InstanceName, " Type ", string(walker_type), " NumPlanes ", string(num_planes), " NumSatsPerPlane ", string(num_sats_per_plane), " InterPlanePhaseIncrement ", string(inter_plane_phasing), " ColorByPlane No ConstellationName ", const_name);
+end
