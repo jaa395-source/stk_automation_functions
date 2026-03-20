@@ -9,7 +9,7 @@ choice = questdlg(dlgQuestion, dlgTitle, btn1, btn2, btn1);
 
 switch choice
     case "Yes"
-        app = actxGetRunningServer('STK12.Application');
+        app = actxGetRunningServer('STK.Application');
         root = app.Personality2;
         scenario = root.CurrentScenario;
     case "No"
