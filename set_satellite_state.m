@@ -6,7 +6,7 @@ arg_of_per = classical_elements(4);
 raan = classical_elements(5);
 ta = classical_elements(6);
 
-set_state_string = strcat("SetState */Satellite/", satellite.InstanceName, ' Classical TwoBody "', string(scenario.StartTime), '" "', string(scenario.StopTime), '" 0.5 J2000 "', string(scenario.StartTime), '" ',...
+set_state_string = strcat("SetState */Satellite/", satellite.InstanceName, ' Classical TwoBody "', string(scenario.StartTime), '" "', string(scenario.StopTime), '" 60 J2000 "', string(scenario.StartTime), '" ',...
     string(sma), " ", string(ecc), " ", string(inc), " ", string(arg_of_per), " ", string(raan), " ", string(ta));
 
 root.ExecuteCommand(set_state_string);
