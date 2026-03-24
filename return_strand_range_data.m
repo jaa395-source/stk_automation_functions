@@ -12,6 +12,6 @@ ranges = cell2mat(dataProviders.Sections.Item(section_number).Intervals.Item(int
 
 strand_names = strrep(strand_names, strand_names, string(from_and_to_array(end)));
 table_of_data = table(times, strand_names, ranges);
-
+from_and_to_array = string(from_and_to_array);
 
 end
