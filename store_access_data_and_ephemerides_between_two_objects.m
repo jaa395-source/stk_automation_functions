@@ -1,8 +1,6 @@
 clc; close all; clear;
 %% Top Level Variables
 satelliteName = "Satellite1";
-hypersonicName = "HXRV_X43";
-hypersonicObjectType = "Aircraft"; % Alternative is "Missile";
 ephemerisFolder = pwd; % defaults to store files in folder where script is run
 dataTimeStep_sec = 1;
 
@@ -12,9 +10,25 @@ root = app.Personality2;
 scenario = root.CurrentScenario;
 root.UnitPreferences.SetCurrentUnit("DateFormat", "EpSec");
 
+%% Load in hypersonic platform
+hypersonicEphemerisFile = pwd + "\HXRV_X43.e";
+hypersonicName = "HXRV_X43";
+hypersonicObjectType = "Aircraft"; % Alternative is "Missile";
+obj_enumeration = char("e" + hypersonicObjectType);
+object_name = hypersonicName;
+
+if ~scenario.Children.GetElements(obj_enumeration).Contains(object_name)
+    hypersonic = scenario.Children.New(obj_enumeration, object_name);
+else
+    hypersonic = scenario.Children.GetElements(obj_enumeration).Item(object_name);
+end
+hypersonic.SetRouteType("ePropagatorStkExternal");
+hypersonic.Route.Filename = hypersonicEphemerisFile;
+hypersonic.Route.Override = 1;
+hypersonic.Route.Propagate;
+
 %% Get handle for Satellite and Hypersonic
 sat = scenario.Children.GetElements('eSatellite').Item(satelliteName);
-hypersonic = scenario.Children.GetElements("e" + char(hypersonicObjectType)).Item(hypersonicName);
 
 %% Calculate access
 accessFileName = ephemerisFolder + "\" + satelliteName + "_to_" + hypersonicName + "_access_data.csv";
